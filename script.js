@@ -15,9 +15,10 @@ class Activites_stagiaires {
 let stagiairesArray = [];
 let activitesArray = [];
 let activites_stagiaires = [];
-let selected_activite ;
+let selected_activite ="";
+let table_activites = document.getElementById("stagiare_activite_table")
 
-
+let selectedRow ;
 // events
 document.addEventListener("DOMContentLoaded",chargement);
 
@@ -27,6 +28,7 @@ document.getElementById("ajouter").addEventListener("click",ajouter_activite)
 
 document.getElementById("supprimer").addEventListener("click",supprimer);
 
+document.getElementById("modifier").addEventListener("click",modifier);
 
 // functions
 
@@ -102,7 +104,7 @@ function afficher_activites(){
                         </tr>`
     }
     document.getElementById("tdata").innerHTML = content_data;
-    let table_activites = document.getElementById("stagiare_activite_table")
+    // let table_activites = document.getElementById("stagiare_activite_table")
     console.log(table_activites.rows.length)
     for (let i = 1 ; i < table_activites.rows.length ; i++){
         table_activites.rows[i].onclick = function(){
@@ -122,4 +124,17 @@ function supprimer (){
         return itemValue.id != selected_activite
     })
     afficher_activites();
+}
+
+function modifier() {
+    const selectedRow = document.querySelector('tr.table-success');
+    const tdElements = selectedRow.querySelectorAll('td');
+    const tdContents = Array.from(tdElements).map(td => td.innerText) 
+
+    document.getElementById("searchText").value = tdContents[2]
+    document.getElementById("activite").value = tdContents[3]
+    document.getElementById("jours").value = tdContents[4]
+    document.getElementById("date_debut").value = tdContents[5]
+    
+    
 }
